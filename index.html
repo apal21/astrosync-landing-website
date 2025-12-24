@@ -32,6 +32,7 @@
 
         /* --- RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-color);
@@ -274,6 +275,10 @@
             color: #2B2B2B;
             backdrop-filter: blur(var(--glass-blur)) saturate(180%);
             -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+        }
+
+        #how-it-works {
+            scroll-margin-top: 120px;
         }
         .hero-footnote {
             font-size: 0.95rem;
@@ -1122,8 +1127,8 @@
         <div class="container nav-inner">
             <div class="logo"><div class="logo-dot"></div> AstroSync</div>
             <div class="nav-actions">
-                <span class="nav-badge">Founding Beta</span>
-                <button class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">Waitlist Only</button>
+                <span class="nav-badge">Beta v1.0</span>
+                <a class="btn btn-secondary" href="https://forms.gle/RSxu7EPwGrvGCxPCA" target="_blank" rel="noopener noreferrer" style="padding: 10px 20px; font-size: 0.9rem;">Waitlist Only</a>
             </div>
         </div>
     </nav>
@@ -1131,19 +1136,19 @@
     <header class="hero">
         <div class="container hero-grid">
             <div class="hero-copy reveal" style="--delay: 0.05s;">
-                <span class="tag">Founding Beta - Limited seats</span>
+                <span class="tag">Experimental Beta - Limited seats</span>
                 <h1>Astrology, <span class="highlight">tested</span> against your real life.</h1>
                 <p>AstroSync compares your past with our model before it predicts your future. If it misses, it learns. You get practical timing without fear tactics or vague mysticism.</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary">Join the Waitlist</button>
-                    <button class="btn btn-secondary">See the Method</button>
+                    <a class="btn btn-primary" href="https://forms.gle/RSxu7EPwGrvGCxPCA" target="_blank" rel="noopener noreferrer">Join the Waitlist</a>
+                    <a class="btn btn-secondary" href="#how-it-works">See the Method</a>
                 </div>
                 <div class="hero-proof">
                     <span>Proof-first insights</span>
                     <span>Privacy-first by design</span>
                     <span>No rituals or upsells</span>
                 </div>
-                <p class="hero-footnote">Cohorts open monthly. Join now to get your invite code.</p>
+                <p class="hero-footnote">Cohorts open monthly. Join now to secure your waitlist spot.</p>
             </div>
             <div class="hero-visual reveal" style="--delay: 0.15s;">
                 <div class="hero-orbit float" aria-hidden="true">
@@ -1346,7 +1351,7 @@
         </div>
     </section>
 
-    <section class="steps">
+    <section class="steps" id="how-it-works">
         <div class="section-orbit orbit-steps" aria-hidden="true">
             <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <line class="constellation-line" x1="110" y1="30" x2="110" y2="290"/>
@@ -1372,8 +1377,8 @@
             <div class="step-row">
                 <div class="step-text">
                     <span class="step-num">01</span>
-                    <h3>Get your invite</h3>
-                    <p>We keep cohorts small to improve accuracy and learn faster. Join the waitlist to reserve your spot.</p>
+                    <h3>Join the waitlist</h3>
+                    <p>We keep cohorts small to improve accuracy and learn faster. Add your name to reserve a spot.</p>
                 </div>
                 <div class="step-visual">🎟️</div>
             </div>
@@ -1465,9 +1470,9 @@
         <div class="container">
             <h2 style="margin-bottom: 24px;">Ready to sync your week?</h2>
             <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px;">
-                Founding beta is free while we test and learn. We will only invite a limited number each month.
+                Founding beta is free while we test and learn. We will only open a limited number of spots each month.
             </p>
-            <button class="btn btn-primary" style="padding: 20px 50px; font-size: 1.2rem;">Join the Waitlist</button>
+            <a class="btn btn-primary" href="https://forms.gle/RSxu7EPwGrvGCxPCA" target="_blank" rel="noopener noreferrer" style="padding: 20px 50px; font-size: 1.2rem;">Join the Waitlist</a>
         </div>
     </section>
 
