@@ -1020,6 +1020,15 @@
                 transform: none;
                 will-change: opacity, filter;
             }
+
+            /* Safari/WebKit can drop backdrop blur when animating filter on these elements. */
+            .hero-orbit.float,
+            .hero-card-wrap.float {
+                animation: float 6s ease-in-out infinite;
+                animation-delay: var(--float-delay, 0s);
+                filter: none;
+                will-change: transform;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
