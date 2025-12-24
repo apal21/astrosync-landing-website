@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AstroSync | The Honest Astrology App</title>
+    <title>AstroSync | Sachi Astrology App</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Space+Grotesk:wght@400;500;600&display=swap');
 
@@ -33,6 +33,11 @@
         /* --- RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+        .lang { display: none; }
+        body[data-lang="hi"] .lang-hi { display: inline; }
+        body[data-lang="hi"] .lang-en { display: none; }
+        body[data-lang="en"] .lang-en { display: inline; }
+        body[data-lang="en"] .lang-hi { display: none; }
 
         body {
             background-color: var(--bg-color);
@@ -199,6 +204,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
         .nav-badge {
             padding: 6px 12px;
@@ -210,6 +216,37 @@
             border: 1px solid rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(var(--glass-blur)) saturate(180%);
             -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+        }
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 10px 24px rgba(20, 12, 8, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(var(--glass-blur)) saturate(170%);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(170%);
+        }
+        .lang-label-short {
+            display: none;
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.78rem;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .lang-btn.is-active {
+            background: rgba(255, 255, 255, 0.85);
+            color: #111;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 8px 20px rgba(20, 12, 8, 0.12);
         }
 
         /* --- HERO --- */
@@ -265,7 +302,7 @@
             flex-wrap: wrap;
             margin-bottom: 18px;
         }
-        .hero-proof span {
+        .hero-proof > span {
             padding: 6px 12px;
             border-radius: 999px;
             background: rgba(255, 255, 255, 0.28);
@@ -646,12 +683,12 @@
             font-size: 0.95rem;
             color: #444;
         }
-        .card-list span {
+        .card-list > span {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .card-list span::before {
+        .card-list > span::before {
             content: '';
             width: 8px;
             height: 8px;
@@ -711,7 +748,7 @@
             gap: 10px;
             color: #F5F5F5;
         }
-        .forecast-row span {
+        .forecast-row .forecast-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -1098,8 +1135,15 @@
             .nav-actions {
                 width: auto;
                 justify-content: flex-end;
+                flex-wrap: nowrap;
+                gap: 8px;
             }
             .nav-badge { display: none; }
+            .lang-toggle { padding: 2px; }
+            .lang-btn { padding: 4px 8px; font-size: 0.7rem; }
+            .nav-actions .btn { padding: 8px 12px; font-size: 0.75rem; }
+            .lang-label-full { display: none; }
+            .lang-label-short { display: inline; }
             .hero-copy { padding: 20px; }
             .hero-buttons {
                 flex-direction: column;
@@ -1121,14 +1165,24 @@
         }
     </style>
 </head>
-<body>
+<body data-lang="hi">
 
     <nav>
         <div class="container nav-inner">
             <div class="logo"><div class="logo-dot"></div> AstroSync</div>
             <div class="nav-actions">
-                <span class="nav-badge">Beta v1.0</span>
-                <a class="btn btn-secondary" href="https://forms.gle/RSxu7EPwGrvGCxPCA" target="_blank" rel="noopener noreferrer" style="padding: 10px 20px; font-size: 0.9rem;">Waitlist Only</a>
+                <span class="nav-badge"><span class="lang lang-hi">Beta v1.0</span><span class="lang lang-en">Beta v1.0</span></span>
+                <div class="lang-toggle" role="group" aria-label="Language toggle">
+                    <button class="lang-btn is-active" type="button" data-lang="hi" aria-pressed="true">
+                        <span class="lang-label-full">Hinglish</span>
+                        <span class="lang-label-short" aria-hidden="true">HI</span>
+                    </button>
+                    <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">
+                        <span class="lang-label-full">English</span>
+                        <span class="lang-label-short" aria-hidden="true">EN</span>
+                    </button>
+                </div>
+                <a class="btn btn-secondary" href="https://forms.gle/RSxu7EPwGrvGCxPCA" target="_blank" rel="noopener noreferrer" style="padding: 10px 20px; font-size: 0.9rem;"><span class="lang lang-hi">Waitlist Only</span><span class="lang lang-en">Waitlist Only</span></a>
             </div>
         </div>
     </nav>
@@ -1136,19 +1190,19 @@
     <header class="hero">
         <div class="container hero-grid">
             <div class="hero-copy reveal" style="--delay: 0.05s;">
-                <span class="tag">Experimental Beta - Limited seats</span>
-                <h1>Astrology, <span class="highlight">tested</span> against your real life.</h1>
-                <p>AstroSync compares your past with our model before it predicts your future. If it misses, it learns. You get practical timing without fear tactics or vague mysticism.</p>
+                <span class="tag"><span class="lang lang-hi">Experimental Beta - Seats limited</span><span class="lang lang-en">Experimental Beta - Limited seats</span></span>
+                <h1><span class="lang lang-hi">Astrology, tumhari real life par <span class="highlight">tested</span>.</span><span class="lang lang-en">Astrology, <span class="highlight">tested</span> against your real life.</span></h1>
+                <p><span class="lang lang-hi">AstroSync future predict karne se pehle tumhare past ko hamare model se compare karta hai. Agar miss ho, to seekhta hai. Tumhe practical timing milti hai, bina fear tactics ya vague mysticism ke.</span><span class="lang lang-en">AstroSync compares your past with our model before it predicts your future. If it misses, it learns. You get practical timing without fear tactics or vague mysticism.</span></p>
                 <div class="hero-buttons">
-                    <a class="btn btn-primary" href="https://forms.gle/RSxu7EPwGrvGCxPCA" target="_blank" rel="noopener noreferrer">Join the Waitlist</a>
-                    <a class="btn btn-secondary" href="#how-it-works">See the Method</a>
+                    <a class="btn btn-primary" href="https://forms.gle/RSxu7EPwGrvGCxPCA" target="_blank" rel="noopener noreferrer"><span class="lang lang-hi">Waitlist join kar lo</span><span class="lang lang-en">Join the Waitlist</span></a>
+                    <a class="btn btn-secondary" href="#manifesto"><span class="lang lang-hi">Manifesto padh lo</span><span class="lang lang-en">Read the Manifesto</span></a>
                 </div>
                 <div class="hero-proof">
-                    <span>Proof-first insights</span>
-                    <span>Privacy-first by design</span>
-                    <span>No rituals or upsells</span>
+                    <span><span class="lang lang-hi">Proof se nikle insights</span><span class="lang lang-en">Proof-first insights</span></span>
+                    <span><span class="lang lang-hi">Design se hi privacy-first</span><span class="lang lang-en">Privacy-first by design</span></span>
+                    <span><span class="lang lang-hi">Na rituals, na upsells</span><span class="lang lang-en">No rituals or upsells</span></span>
                 </div>
-                <p class="hero-footnote">Cohorts open monthly. Join now to secure your waitlist spot.</p>
+                <p class="hero-footnote"><span class="lang lang-hi">Cohorts har month open hote hain. Abhi join karke apni waitlist spot secure kar lo.</span><span class="lang lang-en">Cohorts open monthly. Join now to secure your waitlist spot.</span></p>
             </div>
             <div class="hero-visual reveal" style="--delay: 0.15s;">
                 <div class="hero-orbit float" aria-hidden="true">
@@ -1172,26 +1226,26 @@
                 <div class="hero-card-wrap float" style="--float-delay: 0.8s;">
                     <div class="hero-card">
                         <div class="hero-card-header">
-                            <span class="pill">Today</span>
-                            <span class="sync-score">Daily Sync 84%</span>
+                            <span class="pill"><span class="lang lang-hi">Aaj</span><span class="lang lang-en">Today</span></span>
+                            <span class="sync-score"><span class="lang lang-hi">Aaj ka Sync: 84%</span><span class="lang lang-en">Daily Sync 84%</span></span>
                         </div>
                         <div class="meter">
-                            <div class="meter-label"><span>Sun: Vitality/Health</span><span>Steady</span></div>
+                            <div class="meter-label"><span><span class="lang lang-hi">Sun: Energy/Health</span><span class="lang lang-en">Sun: Vitality/Health</span></span><span><span class="lang lang-hi">Stable</span><span class="lang lang-en">Steady</span></span></div>
                             <div class="meter-bar"><span style="width: 74%;"></span></div>
                         </div>
                         <div class="meter">
-                            <div class="meter-label"><span>Jupiter: Luck</span><span>Rising</span></div>
+                            <div class="meter-label"><span><span class="lang lang-hi">Jupiter: Luck</span><span class="lang lang-en">Jupiter: Luck</span></span><span><span class="lang lang-hi">Badh raha hai</span><span class="lang lang-en">Rising</span></span></div>
                             <div class="meter-bar"><span style="width: 82%;"></span></div>
                         </div>
                         <div class="meter">
-                            <div class="meter-label"><span>Mars: Strength</span><span>Medium</span></div>
+                            <div class="meter-label"><span><span class="lang lang-hi">Mars: Strength</span><span class="lang lang-en">Mars: Strength</span></span><span><span class="lang lang-hi">Medium</span><span class="lang lang-en">Medium</span></span></div>
                             <div class="meter-bar"><span style="width: 58%;"></span></div>
                         </div>
                         <div class="meter">
-                            <div class="meter-label"><span>Mercury: Intelligence</span><span>High</span></div>
+                            <div class="meter-label"><span><span class="lang lang-hi">Mercury: Intelligence</span><span class="lang lang-en">Mercury: Intelligence</span></span><span><span class="lang lang-hi">High</span><span class="lang lang-en">High</span></span></div>
                             <div class="meter-bar"><span style="width: 88%;"></span></div>
                         </div>
-                        <div class="hero-card-footer">Today: protect your focus window after lunch.</div>
+                        <div class="hero-card-footer"><span class="lang lang-hi">Aaj: lunch ke baad apni focus window ko protect kar lo.</span><span class="lang lang-en">Today: protect your focus window after lunch.</span></div>
                     </div>
                 </div>
             </div>
@@ -1218,22 +1272,22 @@
         </div>
         <div class="container signal-inner">
             <div class="signal-heading reveal" style="--delay: 0.05s;">
-                <span class="tag">Signals</span>
-                <h2>How we keep it honest</h2>
-                <p>Three guardrails that turn astrology into a practical planning tool.</p>
+                <span class="tag"><span class="lang lang-hi">Signals</span><span class="lang lang-en">Signals</span></span>
+                <h2><span class="lang lang-hi">Hum isse honest kaise rakhte hain</span><span class="lang lang-en">How we keep it honest</span></h2>
+                <p><span class="lang lang-hi">Teen guardrails jo astrology ko practical planning tool bana dete hain.</span><span class="lang lang-en">Three guardrails that turn astrology into a practical planning tool.</span></p>
             </div>
             <div class="signal-grid">
                 <div class="signal-card reveal" style="--delay: 0.1s;">
-                    <h4>Confidence on every insight</h4>
-                    <p>We don't promise 100% accuracy. We show confidence levels and let the data speak. Anyone claiming certainty is a red flag for a scam.</p>
+                    <h4><span class="lang lang-hi">Har insight pe confidence</span><span class="lang lang-en">Confidence on every insight</span></h4>
+                    <p><span class="lang lang-hi">Hum 100% accuracy ka promise nahi karte. Hum confidence levels dikhate hain, data khud bolta hai. Jo bhi pakki certainty claim kare, woh red flag hai.</span><span class="lang lang-en">We don't promise 100% accuracy. We show confidence levels and let the data speak. Anyone claiming certainty is a red flag for a scam.</span></p>
                 </div>
                 <div class="signal-card reveal" style="--delay: 0.2s;">
-                    <h4>Forecasts, not fate</h4>
-                    <p>Use the timing like a planner. You stay in control.</p>
+                    <h4><span class="lang lang-hi">Forecasts, naseeb nahi</span><span class="lang lang-en">Forecasts, not fate</span></h4>
+                    <p><span class="lang lang-hi">Timing ko planner ki tarah use karo. Control tumhare haath me rehta hai.</span><span class="lang lang-en">Use the timing like a planner. You stay in control.</span></p>
                 </div>
                 <div class="signal-card reveal" style="--delay: 0.3s;">
-                    <h4>Designed for skeptics</h4>
-                    <p>No fear language, no rituals, no subscription bait.</p>
+                    <h4><span class="lang lang-hi">Skeptics ke liye designed</span><span class="lang lang-en">Designed for skeptics</span></h4>
+                    <p><span class="lang lang-hi">Na fear language, na rituals, na subscription bait.</span><span class="lang lang-en">No fear language, no rituals, no subscription bait.</span></p>
                 </div>
             </div>
         </div>
@@ -1264,36 +1318,36 @@
                 <!-- Card 1: The Core Value -->
                 <div class="card card-large reveal" style="--delay: 0.1s;">
                     <span class="card-icon">↺</span>
-                    <h3>Back-test before you trust</h3>
-                    <p>We start by validating what already happened. If it misses, it learns.</p>
+                    <h3><span class="lang lang-hi">Trust se pehle back-test</span><span class="lang lang-en">Back-test before you trust</span></h3>
+                    <p><span class="lang lang-hi">Hum pehle woh check karte hain jo already ho chuka hai. Agar miss ho, toh model seekhta hai.</span><span class="lang lang-en">We start by validating what already happened. If it misses, it learns.</span></p>
                     <div class="card-list">
-                        <span>Fast yes/no prompts about key life moments</span>
-                        <span>Forecasts include a visible confidence score</span>
+                        <span><span class="lang lang-hi">Key life moments pe quick yes/no prompts</span><span class="lang lang-en">Fast yes/no prompts about key life moments</span></span>
+                        <span><span class="lang lang-hi">Forecasts ke saath visible confidence score bhi milega</span><span class="lang lang-en">Forecasts include a visible confidence score</span></span>
                     </div>
                     <div class="truth-tiles">
                         <div class="truth-tile">
-                            <span class="tile-label">Moved homes last year</span>
-                            <span class="tile-answer yes">Yes</span>
+                            <span class="tile-label"><span class="lang lang-hi">Pichle saal ghar shift kiya</span><span class="lang lang-en">Moved homes last year</span></span>
+                            <span class="tile-answer yes"><span class="lang lang-hi">Haan</span><span class="lang lang-en">Yes</span></span>
                         </div>
                         <div class="truth-tile">
-                            <span class="tile-label">Job shift in 12 months</span>
-                            <span class="tile-answer yes">Yes</span>
+                            <span class="tile-label"><span class="lang lang-hi">12 months me job shift</span><span class="lang lang-en">Job shift in 12 months</span></span>
+                            <span class="tile-answer yes"><span class="lang lang-hi">Haan</span><span class="lang lang-en">Yes</span></span>
                         </div>
                         <div class="truth-tile">
-                            <span class="tile-label">Major relationship change</span>
-                            <span class="tile-answer no">No</span>
+                            <span class="tile-label"><span class="lang lang-hi">Bada relationship change</span><span class="lang lang-en">Major relationship change</span></span>
+                            <span class="tile-answer no"><span class="lang lang-hi">Nahi</span><span class="lang lang-en">No</span></span>
                         </div>
                         <div class="truth-tile">
-                            <span class="tile-label">New city or long travel</span>
-                            <span class="tile-answer yes">Yes</span>
+                            <span class="tile-label"><span class="lang lang-hi">Naya shehar ya long travel</span><span class="lang lang-en">New city or long travel</span></span>
+                            <span class="tile-answer yes"><span class="lang lang-hi">Haan</span><span class="lang lang-en">Yes</span></span>
                         </div>
                         <div class="truth-tile">
-                            <span class="tile-label">Started a new habit</span>
-                            <span class="tile-answer yes">Yes</span>
+                            <span class="tile-label"><span class="lang lang-hi">Nayi habit start ki</span><span class="lang lang-en">Started a new habit</span></span>
+                            <span class="tile-answer yes"><span class="lang lang-hi">Haan</span><span class="lang lang-en">Yes</span></span>
                         </div>
                         <div class="truth-tile">
-                            <span class="tile-label">Unexpected expense spike</span>
-                            <span class="tile-answer no">No</span>
+                            <span class="tile-label"><span class="lang lang-hi">Kharche me achanak spike</span><span class="lang lang-en">Unexpected expense spike</span></span>
+                            <span class="tile-answer no"><span class="lang lang-hi">Nahi</span><span class="lang lang-en">No</span></span>
                         </div>
                     </div>
                 </div>
@@ -1301,32 +1355,32 @@
                 <!-- Card 2: The Logic -->
                 <div class="card card-tall reveal" style="--delay: 0.15s;">
                     <span class="card-icon">🌤️</span>
-                    <h3>No doom, just timing</h3>
-                    <p>Planets are signals, not sentences. We treat them like weather you can prepare for.</p>
+                    <h3><span class="lang lang-hi">No doom, bas timing</span><span class="lang lang-en">No doom, just timing</span></h3>
+                    <p><span class="lang lang-hi">Planets signals hain, sentences nahi. Hum unhe weather ki tarah treat karte hain, jiske liye tum prepare kar sako.</span><span class="lang lang-en">Planets are signals, not sentences. We treat them like weather you can prepare for.</span></p>
                     <div class="forecast-list">
-                        <div class="forecast-row"><span>☔</span> Double check important messages.</div>
-                        <div class="forecast-row"><span>🌬️</span> Keep schedules flexible.</div>
-                        <div class="forecast-row"><span>🌞</span> Ship bold ideas.</div>
+                        <div class="forecast-row"><span class="forecast-icon">☔</span><span class="lang lang-hi">Important messages double-check kar lo.</span><span class="lang lang-en">Double check important messages.</span></div>
+                        <div class="forecast-row"><span class="forecast-icon">🌬️</span><span class="lang lang-hi">Schedules flexible rakho.</span><span class="lang lang-en">Keep schedules flexible.</span></div>
+                        <div class="forecast-row"><span class="forecast-icon">🌞</span><span class="lang lang-hi">Bold ideas ship kar do.</span><span class="lang lang-en">Ship bold ideas.</span></div>
                     </div>
-                    <p style="margin-top: 24px; color: #fff; font-weight: 600;">Practical. Clear. Useful.</p>
+                    <p style="margin-top: 24px; color: #fff; font-weight: 600;"><span class="lang lang-hi">Practical. Clear. Useful.</span><span class="lang lang-en">Practical. Clear. Useful.</span></p>
                 </div>
 
                 <!-- Card 3: Daily Meters -->
                 <div class="card reveal" style="--delay: 0.2s;">
-                    <h3>Your Daily Meters</h3>
-                    <p>Track energy, focus, and social flow like a battery. No guesswork.</p>
+                    <h3><span class="lang lang-hi">Tumhare Daily Meters</span><span class="lang lang-en">Your Daily Meters</span></h3>
+                    <p><span class="lang lang-hi">Energy, focus, aur social flow ko battery jaise track karo. Guesswork zero.</span><span class="lang lang-en">Track energy, focus, and social flow like a battery. No guesswork.</span></p>
                     <div class="ui-preview">
                         <div class="ui-header">
-                            <span>Today</span>
-                            <span>Updated 8:10 AM</span>
+                            <span><span class="lang lang-hi">Aaj</span><span class="lang lang-en">Today</span></span>
+                            <span><span class="lang lang-hi">8:10 AM update</span><span class="lang lang-en">Updated 8:10 AM</span></span>
                         </div>
                         <div class="bar-chart">
                             <div class="bar">
-                                <span>Social</span>
+                                <span><span class="lang lang-hi">Social</span><span class="lang lang-en">Social</span></span>
                                 <div class="fill-bg"><div class="fill orange"></div></div>
                             </div>
                             <div class="bar">
-                                <span>Focus</span>
+                                <span><span class="lang lang-hi">Focus</span><span class="lang lang-en">Focus</span></span>
                                 <div class="fill-bg"><div class="fill green"></div></div>
                             </div>
                         </div>
@@ -1336,15 +1390,15 @@
                 <!-- Card 4: Quests -->
                 <div class="card reveal" style="--delay: 0.25s;">
                     <span class="card-icon">🗓️</span>
-                    <h3>Life Chapters</h3>
-                    <p>See your year in clean chapters. Push for growth when the window is open. Rest when it is not.</p>
+                    <h3><span class="lang lang-hi">Life ke Chapters</span><span class="lang lang-en">Life Chapters</span></h3>
+                    <p><span class="lang lang-hi">Apna saal clean chapters me dekho. Window open ho to growth ke liye push karo, warna rest karo.</span><span class="lang lang-en">See your year in clean chapters. Push for growth when the window is open. Rest when it is not.</span></p>
                 </div>
 
                 <!-- Card 5: Trust -->
                 <div class="card reveal" style="--delay: 0.3s;">
                     <span class="card-icon">🛡️</span>
-                    <h3>Privacy and control</h3>
-                    <p>Your answers train your profile only. No selling, no ads, and no creepy tracking.</p>
+                    <h3><span class="lang lang-hi">Privacy aur control</span><span class="lang lang-en">Privacy and control</span></h3>
+                    <p><span class="lang lang-hi">Tumhare answers sirf tumhara profile train karte hain. Na selling, na ads, na creepy tracking.</span><span class="lang lang-en">Your answers train your profile only. No selling, no ads, and no creepy tracking.</span></p>
                 </div>
 
             </div>
@@ -1369,16 +1423,16 @@
         </div>
         <div class="container">
             <div class="steps-heading">
-                <h2>How the Experiment Works</h2>
-                <p>Three steps to a calmer, clearer forecast.</p>
+                <h2><span class="lang lang-hi">Experiment kaise work karta hai</span><span class="lang lang-en">How the Experiment Works</span></h2>
+                <p><span class="lang lang-hi">Calmer aur clearer forecast ke liye 3 simple steps.</span><span class="lang lang-en">Three steps to a calmer, clearer forecast.</span></p>
             </div>
 
             <!-- Step 1 -->
             <div class="step-row">
                 <div class="step-text">
                     <span class="step-num">01</span>
-                    <h3>Join the waitlist</h3>
-                    <p>We keep cohorts small to improve accuracy and learn faster. Add your name to reserve a spot.</p>
+                    <h3><span class="lang lang-hi">Waitlist join kar lo</span><span class="lang lang-en">Join the waitlist</span></h3>
+                    <p><span class="lang lang-hi">Hum cohorts small rakhte hain taaki accuracy better ho aur learning fast rahe. Apna naam add karke spot reserve kar lo.</span><span class="lang lang-en">We keep cohorts small to improve accuracy and learn faster. Add your name to reserve a spot.</span></p>
                 </div>
                 <div class="step-visual">🎟️</div>
             </div>
@@ -1387,8 +1441,8 @@
             <div class="step-row reverse">
                 <div class="step-text">
                     <span class="step-num">02</span>
-                    <h3>Play the truth game</h3>
-                    <p>Swipe yes or no on events from your past. The model calibrates to your actual history.</p>
+                    <h3><span class="lang lang-hi">Truth game khelo</span><span class="lang lang-en">Play the truth game</span></h3>
+                    <p><span class="lang lang-hi">Apne past events par yes/no swipe karo. Model tumhari actual history ke hisaab se calibrate ho jata hai.</span><span class="lang lang-en">Swipe yes or no on events from your past. The model calibrates to your actual history.</span></p>
                 </div>
                 <div class="step-visual">📱</div>
             </div>
@@ -1397,8 +1451,8 @@
             <div class="step-row">
                 <div class="step-text">
                     <span class="step-num">03</span>
-                    <h3>Open your dashboard</h3>
-                    <p>Unlock daily meters, life chapters, and a forecast you can actually act on.</p>
+                    <h3><span class="lang lang-hi">Apna dashboard kholo</span><span class="lang lang-en">Open your dashboard</span></h3>
+                    <p><span class="lang lang-hi">Daily meters, life chapters, aur aisa forecast unlock karo jo tumhare kaam aaye.</span><span class="lang lang-en">Unlock daily meters, life chapters, and a forecast you can actually act on.</span></p>
                 </div>
                 <div class="step-visual">🚀</div>
             </div>
@@ -1406,7 +1460,7 @@
         </div>
     </section>
 
-    <section class="manifesto-section">
+    <section class="manifesto-section" id="manifesto">
         <div class="section-orbit orbit-manifesto" aria-hidden="true">
             <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <circle class="constellation-line" cx="160" cy="120" r="80"/>
@@ -1425,26 +1479,26 @@
         </div>
         <div class="container">
             <div style="text-align: center; margin-bottom: 60px;">
-                <span class="tag">Our Promise</span>
-                <h2 style="font-size: 2.5rem;">The Manifesto</h2>
+                <span class="tag"><span class="lang lang-hi">Humara Promise</span><span class="lang lang-en">Our Promise</span></span>
+                <h2 style="font-size: 2.5rem;"><span class="lang lang-hi">Manifesto</span><span class="lang lang-en">The Manifesto</span></h2>
             </div>
 
             <div class="manifesto-grid">
                 <div class="manifesto-card reveal" style="--delay: 0.05s;">
-                    <h3>Belief is Optional.</h3>
-                    <p>Gravity works whether you believe in it or not. A predictive engine should be the same. If it requires faith, it's a scam.</p>
+                    <h3><span class="lang lang-hi">Belief optional hai.</span><span class="lang lang-en">Belief is Optional.</span></h3>
+                    <p><span class="lang lang-hi">Gravity kaam karti hai, chahe tum believe karo ya nahi. Predictive engine bhi waise hi hona chahiye. Agar faith ki zarurat ho, to samjho scam.</span><span class="lang lang-en">Gravity works whether you believe in it or not. A predictive engine should be the same. If it requires faith, it's a scam.</span></p>
                 </div>
                 <div class="manifesto-card reveal" style="--delay: 0.1s;">
-                    <h3>Receipts Before Predictions.</h3>
-                    <p>If an app can't accurately identify your past, it has no business predicting your future. We prove our worth backwards first.</p>
+                    <h3><span class="lang lang-hi">Predictions se pehle receipts.</span><span class="lang lang-en">Receipts Before Predictions.</span></h3>
+                    <p><span class="lang lang-hi">Agar app tumhara past accurately identify nahi kar sakta, to uska future predict karna banta hi nahi. Hum pehle backwards se apni worth prove karte hain.</span><span class="lang lang-en">If an app can't accurately identify your past, it has no business predicting your future. We prove our worth backwards first.</span></p>
                 </div>
                 <div class="manifesto-card reveal" style="--delay: 0.15s;">
-                    <h3>Fate is Editable.</h3>
-                    <p>There is no "Bad Luck", only bad preparation. "Doshas" aren't a curse; they are just a heads-up. Don't pray it away; plan around it.</p>
+                    <h3><span class="lang lang-hi">Fate editable hai.</span><span class="lang lang-en">Fate is Editable.</span></h3>
+                    <p><span class="lang lang-hi">Koi "Bad Luck" nahi hota, sirf bad preparation hoti hai. "Doshas" curse nahi, bas heads-up hain. Pray karke hatao mat; plan karke handle karo.</span><span class="lang lang-en">There is no "Bad Luck", only bad preparation. "Doshas" aren't a curse; they are just a heads-up. Don't pray it away; plan around it.</span></p>
                 </div>
                 <div class="manifesto-card reveal" style="--delay: 0.2s;">
-                    <h3>No Saffron. Just Silicon.</h3>
-                    <p>We are the first generation to strip the religion out of the stars. No rituals. No expensive stones. Just raw data.</p>
+                    <h3><span class="lang lang-hi">Na Saffron. Sirf Silicon.</span><span class="lang lang-en">No Saffron. Just Silicon.</span></h3>
+                    <p><span class="lang lang-hi">Hum pehli generation hain jo stars se religion ko strip kar rahe hain. Na rituals. Na expensive stones. Bas raw data.</span><span class="lang lang-en">We are the first generation to strip the religion out of the stars. No rituals. No expensive stones. Just raw data.</span></p>
                 </div>
             </div>
         </div>
@@ -1468,11 +1522,11 @@
             </svg>
         </div>
         <div class="container">
-            <h2 style="margin-bottom: 24px;">Ready to sync your week?</h2>
+            <h2 style="margin-bottom: 24px;"><span class="lang lang-hi">Apna week sync karne ke liye ready ho?</span><span class="lang lang-en">Ready to sync your week?</span></h2>
             <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px;">
-                Founding beta is free while we test and learn. We will only open a limited number of spots each month.
+                <span class="lang lang-hi">Founding beta free hai jab tak hum test aur learn kar rahe hain. Har month sirf limited spots open honge.</span><span class="lang lang-en">Founding beta is free while we test and learn. We will only open a limited number of spots each month.</span>
             </p>
-            <a class="btn btn-primary" href="https://forms.gle/RSxu7EPwGrvGCxPCA" target="_blank" rel="noopener noreferrer" style="padding: 20px 50px; font-size: 1.2rem;">Join the Waitlist</a>
+            <a class="btn btn-primary" href="https://forms.gle/RSxu7EPwGrvGCxPCA" target="_blank" rel="noopener noreferrer" style="padding: 20px 50px; font-size: 1.2rem;"><span class="lang lang-hi">Waitlist join kar lo</span><span class="lang lang-en">Join the Waitlist</span></a>
         </div>
     </section>
 
@@ -1493,34 +1547,62 @@
             </svg>
         </div>
         <div class="container">
-            <span class="tag">Connect</span>
-            <h2>Follow the build</h2>
-            <p style="color: var(--text-muted); margin-top: 10px;">We share progress, experiments, and lessons in public.</p>
+            <span class="tag"><span class="lang lang-hi">Connect</span><span class="lang lang-en">Connect</span></span>
+            <h2><span class="lang lang-hi">Build ko follow kar lo</span><span class="lang lang-en">Follow the build</span></h2>
+            <p style="color: var(--text-muted); margin-top: 10px;"><span class="lang lang-hi">Hum progress, experiments, aur lessons public me share karte hain.</span><span class="lang lang-en">We share progress, experiments, and lessons in public.</span></p>
 
             <div class="contact-grid">
-                <a href="#" class="contact-card">
-                    <span>📸</span> Instagram
+                <a href="https://instagram.com/code_curiosity" class="contact-card" target="_blank" rel="noopener noreferrer">
+                    <span>📸</span><span class="lang lang-hi">Instagram</span><span class="lang lang-en">Instagram</span>
                 </a>
-                <a href="#" class="contact-card">
-                    <span>🐦</span> Twitter / X
+                <a href="https://x.com/BuilderVishal" class="contact-card" target="_blank" rel="noopener noreferrer">
+                    <span>🐦</span><span class="lang lang-hi">Twitter / X</span><span class="lang lang-en">Twitter / X</span>
                 </a>
-                <a href="mailto:hello@astrosync.app" class="contact-card">
-                    <span>✉️</span> hello@astrosync.app
+                <a href="mailto:hello@astrosync.in" class="contact-card" target="_blank" rel="noopener noreferrer">
+                    <span>✉️</span><span class="lang lang-hi">hello@astrosync.in</span><span class="lang lang-en">hello@astrosync.in</span>
                 </a>
             </div>
 
             <div class="legal-note">
-                AstroSync provides reflective insights for personal planning. It is not a substitute for medical, legal, or financial advice.
+                <span class="lang lang-hi">AstroSync personal planning ke liye reflective insights deta hai. Ye medical, legal, ya financial advice ka substitute nahi hai.</span><span class="lang lang-en">AstroSync provides reflective insights for personal planning. It is not a substitute for medical, legal, or financial advice.</span>
             </div>
 
             <div style="margin-top: 30px; font-size: 0.8rem; color: #999;">
-                &copy; <span id="copyright-year">2026</span> AstroSync Inc. All rights reserved.
+                &copy; <span id="copyright-year">2026</span> <span class="lang lang-hi">AstroSync Inc. Sabhi rights reserved.</span><span class="lang lang-en">AstroSync Inc. All rights reserved.</span>
             </div>
         </div>
     </section>
 
     <script>
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+        const titleByLang = {
+            hi: 'AstroSync | Sachi Astrology App',
+            en: 'AstroSync | The Honest Astrology App'
+        };
+
+        const langButtons = document.querySelectorAll('.lang-btn');
+
+        const setLanguage = (lang) => {
+            document.body.setAttribute('data-lang', lang);
+            document.documentElement.lang = lang === 'en' ? 'en' : 'hi';
+            if (titleByLang[lang]) {
+                document.title = titleByLang[lang];
+            }
+            langButtons.forEach((button) => {
+                const isActive = button.dataset.lang === lang;
+                button.classList.toggle('is-active', isActive);
+                button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+        };
+
+        langButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                setLanguage(button.dataset.lang);
+            });
+        });
+
+        setLanguage(document.body.getAttribute('data-lang') || 'hi');
     </script>
 
 </body>
