@@ -157,6 +157,47 @@
             border-color: rgba(255, 255, 255, 0.9);
         }
 
+        .btn-store {
+            padding: 14px 22px;
+            font-size: 0.95rem;
+            border-radius: 999px;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 16px 36px rgba(20, 12, 8, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .btn-store:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 42px rgba(20, 12, 8, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .btn-apple {
+            background: linear-gradient(135deg, #0f0f0f, #3a3a3a);
+        }
+        .btn-google {
+            background: linear-gradient(135deg, #4285F4 0%, #34A853 35%, #FBBC05 70%, #EA4335 100%);
+        }
+        .store-buttons {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .store-buttons--nav {
+            gap: 8px;
+            flex-wrap: nowrap;
+        }
+        .store-buttons--nav .btn-store {
+            padding: 8px 14px;
+            font-size: 0.8rem;
+        }
+        .store-buttons--cta .btn-store {
+            padding: 18px 28px;
+            font-size: 1.05rem;
+        }
+        .store-label-short {
+            display: none;
+        }
+
         .tag {
             display: inline-block;
             padding: 6px 14px;
@@ -1167,13 +1208,21 @@
             .nav-badge { display: none; }
             .lang-toggle { padding: 2px; }
             .lang-btn { padding: 4px 8px; font-size: 0.7rem; }
-            .nav-actions .btn { padding: 8px 12px; font-size: 0.75rem; }
+            .store-buttons--nav { gap: 6px; }
+            .nav-actions .btn-store { padding: 6px 10px; font-size: 0.7rem; }
             .lang-label-full { display: none; }
             .lang-label-short { display: inline; }
+            .store-label-full { display: none; }
+            .store-label-short { display: inline; }
             .hero-copy { padding: 20px; }
             .hero-buttons {
                 flex-direction: column;
                 width: 100%;
+            }
+            .hero-buttons .store-buttons,
+            .cta-section .store-buttons {
+                width: 100%;
+                flex-direction: column;
             }
             .hero-buttons .btn,
             .cta-section .btn {
@@ -1206,7 +1255,7 @@
         <div class="container nav-inner">
             <div class="logo"><div class="logo-dot"></div> AstroSync</div>
             <div class="nav-actions">
-                <span class="nav-badge"><span class="lang lang-hi">Beta v1.0</span><span class="lang lang-en">Beta v1.0</span></span>
+                <span class="nav-badge"><span class="lang lang-hi">Ab Live</span><span class="lang lang-en">Live Now</span></span>
                 <div class="lang-toggle" role="group" aria-label="Language toggle">
                     <button class="lang-btn is-active" type="button" data-lang="hi" aria-pressed="true">
                         <span class="lang-label-full">Hinglish</span>
@@ -1217,7 +1266,16 @@
                         <span class="lang-label-short" aria-hidden="true">EN</span>
                     </button>
                 </div>
-                <a class="btn btn-secondary" href="https://app.astrosync.in" target="_blank" rel="noopener noreferrer" style="padding: 10px 20px; font-size: 0.9rem;"><span class="lang lang-hi">App kholo</span><span class="lang lang-en">Open App</span></a>
+                <div class="store-buttons store-buttons--nav">
+                    <a class="btn btn-store btn-apple" href="https://apps.apple.com/in/app/astrosync-train-your-own-ai/id6757424310" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+                        <span class="store-label-full"><span class="lang lang-hi">App Store</span><span class="lang lang-en">App Store</span></span>
+                        <span class="store-label-short" aria-hidden="true">iOS</span>
+                    </a>
+                    <a class="btn btn-store btn-google" href="https://play.google.com/store/apps/details?id=in.astrosync.app" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+                        <span class="store-label-full"><span class="lang lang-hi">Google Play</span><span class="lang lang-en">Google Play</span></span>
+                        <span class="store-label-short" aria-hidden="true">Android</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -1225,11 +1283,20 @@
     <header class="hero">
         <div class="container hero-grid">
             <div class="hero-copy reveal" style="--delay: 0.05s;">
-                <span class="tag"><span class="lang lang-hi">Live beta - abhi use karo</span><span class="lang lang-en">Live beta - try it now</span></span>
+                <span class="tag"><span class="lang lang-hi">Ab iOS aur Android pe live</span><span class="lang lang-en">Now live on iOS &amp; Android</span></span>
                 <h1><span class="lang lang-hi">Astrology, tumhari real life par <span class="highlight">tested</span>.</span><span class="lang lang-en">Astrology, <span class="highlight">tested</span> against your real life.</span></h1>
                 <p><span class="lang lang-hi">AstroSync future predict karne se pehle tumhare past ko hamare model se compare karta hai. Agar miss ho, to seekhta hai. Tumhe practical timing milti hai, bina fear tactics ya vague mysticism ke.</span><span class="lang lang-en">AstroSync compares your past with our model before it predicts your future. If it misses, it learns. You get practical timing without fear tactics or vague mysticism.</span></p>
                 <div class="hero-buttons">
-                    <a class="btn btn-primary" href="https://app.astrosync.in" target="_blank" rel="noopener noreferrer"><span class="lang lang-hi">App kholo</span><span class="lang lang-en">Open the App</span></a>
+                    <div class="store-buttons">
+                        <a class="btn btn-store btn-apple" href="https://apps.apple.com/in/app/astrosync-train-your-own-ai/id6757424310" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+                            <span class="store-label-full"><span class="lang lang-hi">App Store</span><span class="lang lang-en">App Store</span></span>
+                            <span class="store-label-short" aria-hidden="true">iOS</span>
+                        </a>
+                        <a class="btn btn-store btn-google" href="https://play.google.com/store/apps/details?id=in.astrosync.app" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+                            <span class="store-label-full"><span class="lang lang-hi">Google Play</span><span class="lang lang-en">Google Play</span></span>
+                            <span class="store-label-short" aria-hidden="true">Android</span>
+                        </a>
+                    </div>
                     <a class="btn btn-secondary" href="#manifesto"><span class="lang lang-hi">Manifesto padh lo</span><span class="lang lang-en">Read the Manifesto</span></a>
                 </div>
                 <div class="hero-proof">
@@ -1237,7 +1304,7 @@
                     <span><span class="lang lang-hi">Design se hi privacy-first</span><span class="lang lang-en">Privacy-first by design</span></span>
                     <span><span class="lang lang-hi">Na rituals, na upsells</span><span class="lang lang-en">No rituals or upsells</span></span>
                 </div>
-                <p class="hero-footnote"><span class="lang lang-hi">App par jaake apna dashboard unlock karo.</span><span class="lang lang-en">Open the app to unlock your dashboard.</span></p>
+                <p class="hero-footnote"><span class="lang lang-hi">App Store ya Google Play se download karke apna dashboard unlock karo.</span><span class="lang lang-en">Download from the App Store or Google Play to unlock your dashboard.</span></p>
             </div>
             <div class="hero-visual reveal" style="--delay: 0.15s;">
                 <div class="hero-orbit float" aria-hidden="true">
@@ -1559,9 +1626,18 @@
         <div class="container">
             <h2 style="margin-bottom: 24px;"><span class="lang lang-hi">Apna week sync karne ke liye ready ho?</span><span class="lang lang-en">Ready to sync your week?</span></h2>
             <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px;">
-                <span class="lang lang-hi">App khol ke apna daily sync aur life chapters abhi dekho.</span><span class="lang lang-en">Open the app to see your daily sync and life chapters now.</span>
+                <span class="lang lang-hi">iOS aur Android dono pe available. App Store ya Google Play se download kar lo.</span><span class="lang lang-en">Available on iOS and Android. Download from the App Store or Google Play.</span>
             </p>
-            <a class="btn btn-primary" href="https://app.astrosync.in" target="_blank" rel="noopener noreferrer" style="padding: 20px 50px; font-size: 1.2rem;"><span class="lang lang-hi">App kholo</span><span class="lang lang-en">Open the App</span></a>
+            <div class="store-buttons store-buttons--cta">
+                <a class="btn btn-store btn-apple" href="https://apps.apple.com/in/app/astrosync-train-your-own-ai/id6757424310" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+                    <span class="store-label-full"><span class="lang lang-hi">App Store</span><span class="lang lang-en">App Store</span></span>
+                    <span class="store-label-short" aria-hidden="true">iOS</span>
+                </a>
+                <a class="btn btn-store btn-google" href="https://play.google.com/store/apps/details?id=in.astrosync.app" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+                    <span class="store-label-full"><span class="lang lang-hi">Google Play</span><span class="lang lang-en">Google Play</span></span>
+                    <span class="store-label-short" aria-hidden="true">Android</span>
+                </a>
+            </div>
         </div>
     </section>
 
